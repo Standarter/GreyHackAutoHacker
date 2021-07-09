@@ -1,0 +1,106 @@
+current = current_path
+if get_shell.host_computer.File(current + "/" + "AutoScanner.src") == null then
+	touch(current, "AutoScanner.src")
+end if
+if get_shell.host_computer.File(current + "/" + "launcher.src") == null then
+	touch(current, "launcher.src")
+end if
+if get_shell.host_computer.File(current + "/" + "AutoExploiter.src") == null then
+	touch(current, "AutoExploiter.src")
+end if
+if get_shell.host_computer.File(current + "/" + "AutoExploiterRemote.src") == null then
+	touch(current, "AutoExploiterRemote.src")
+end if
+if get_shell.host_computer.File(current + "/" + "LibSearch.src") == null then
+	touch(current, "LibSearch.src")
+end if
+AutoLEVEL = function(folder)
+	path1 = current_path + "/exploits/" + folder 
+	get_shell.host_computer.create_folder(path1, "LEVEL1")
+	get_shell.host_computer.create_folder(path1, "LEVEL2")
+	get_shell.host_computer.create_folder(path1, "LEVEL3")
+end function
+AutoLOCAL = function(folder)
+	path1 = current_path + "/local/" + folder 
+	get_shell.host_computer.create_folder(path1, "NewPassword")
+	get_shell.host_computer.create_folder(path1, "GetMail")
+	get_shell.host_computer.create_folder(path1, "Shell")
+	get_shell.host_computer.create_folder(path1, "passwd")
+	get_shell.host_computer.create_folder(path1, "GetMoney")
+end function
+AutoREMOTE = function(folder, file)
+	path1 = current_path + "/exploits/" + folder + "/"
+	file.copy(path1 + "LEVEL1/", file.name)
+	file.copy(path1 + "LEVEL2/", file.name)
+	file.copy(path1 + "LEVEL3/", file.name)
+	end function
+get_shell.host_computer.create_folder(current, "exploits")
+get_shell.host_computer.create_folder(current, "builds")
+get_shell.host_computer.create_folder(current, "router")
+get_shell.host_computer.create_folder(current, "local")
+current1 = current + "/" + "exploits"
+current2 = current + "/" + "router"
+current3 = current + "/" + "local"
+get_shell.host_computer.create_folder(current1, "FTP")
+get_shell.host_computer.create_folder(current1, "SQL")
+get_shell.host_computer.create_folder(current1, "SSH")
+get_shell.host_computer.create_folder(current1, "HTTP")
+get_shell.host_computer.create_folder(current1, "SMTP")
+get_shell.host_computer.create_folder(current1, "RSHELL")
+get_shell.host_computer.create_folder(current1, "BANK")
+get_shell.host_computer.create_folder(current1, "passwd")
+get_shell.host_computer.create_folder(current1, "NewPassword")
+AutoLEVEL("FTP")
+AutoLEVEL("SQL")
+AutoLEVEL("SSH")
+AutoLEVEL("HTTP")
+AutoLEVEL("SMTP")
+AutoLEVEL("RSHELL")
+AutoLEVEL("BANK")
+AutoLEVEL("passwd")
+AutoLEVEL("NewPassword")
+get_shell.host_computer.create_folder(current2, "Firewall")
+get_shell.host_computer.create_folder(current2, "Computer")
+get_shell.host_computer.create_folder(current2, "passwd")
+get_shell.host_computer.create_folder(current3, "Metaxploit")
+get_shell.host_computer.create_folder(current3, "Kernel")
+get_shell.host_computer.create_folder(current3, "Crypto")
+get_shell.host_computer.create_folder(current3, "Init")
+get_shell.host_computer.create_folder(current3, "net")
+AutoLOCAL("Metaxploit")
+AutoLOCAL("Kernel")
+AutoLOCAL("Crypto")
+AutoLOCAL("Init")
+AutoLOCAL("net")
+user_input("Press enter, if you copy text from GitHub...")
+path2 = current + "/" + "builds/"
+get_shell.build(current + "/" + "AutoScanner.src", path2)
+get_shell.build(current + "/" + "AutoExploiter.src", path2)
+get_shell.build(current + "/" + "AutoExploiterRemote.src", path2)
+get_shell.build(current + "/" + "launcher.src", path2)
+get_shell.build(current + "/" + "LibSearch.src", path2)
+AutoScanner = get_shell.host_computer.File(path2 + "AutoScanner")
+AE = get_shell.host_computer.File(path2 + "AutoExploiter")
+launcher = get_shell.host_computer.File(path2 + "launcher")
+LibS = get_shell.host_computer.File(path2 + "LibSearch")
+AutoScanner.copy(current, AutoScanner.name)
+LibS.copy(current + "/local/", LibS.name)
+launcher.copy(current + "/exploits/", launcher.name)
+AE.copy(current + "/local/", AE.name)
+AER = get_shell.host_computer.File(path2 + "AutoExploiterRemote")
+AutoREMOTE("FTP", AER)
+AutoREMOTE("SQL", AER)
+AutoREMOTE("SSH", AER)
+AutoREMOTE("HTTP", AER)
+AutoREMOTE("SMTP", AER)
+AutoREMOTE("RSHELL", AER)
+AutoREMOTE("BANK", AER)
+AutoREMOTE("passwd", AER)
+AutoREMOTE("NewPassword", AER)
+AutoScanner.delete
+AE.delete
+AER.delete
+LibS.delete
+launcher.delete
+
+
