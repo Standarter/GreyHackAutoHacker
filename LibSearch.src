@@ -1,0 +1,6 @@
+i = 0
+libs = get_shell.host_computer.File("/lib").get_files
+for lib in libs
+	i = i + 1
+	print(i + ") " + lib.name)
+end for
