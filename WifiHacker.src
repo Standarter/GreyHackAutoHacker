@@ -1,0 +1,35 @@
+print("###################################")
+print("WifiHacker")
+print("Version: 1.0")
+crypto = include_lib("/lib/crypto.so")
+computer = get_shell.host_computer
+print("###################################")
+networks = computer.wifi_networks("wlan0")
+i = 0
+for network in networks
+	network = network.split(" ")
+	print(i + ") " + network[2] + " (" + network[1] + ")")
+	i = i + 1
+end for
+network_selected = user_input("Enter number: ")
+bssid = networks[network_selected.val].split(" ")[0]
+essid = networks[network_selected.val].split(" ")[2]
+print("###################################")
+crypto.airmon("start", "wlan0")
+print("wlan0 in monitor mode")
+print("###################################")
+print("Selected ESSID: " + essid)
+print("Selected BSSID: " + bssid)
+print("###################################")
+crypto.aireplay(bssid, essid, 10000)
+print("###################################")
+wait(5)
+password = crypto.aircrack(home_dir + "/file.cap")
+if computer.connect_wifi("wlan0", bssid, essid, password) == 1 then
+	print("Connected: " + essid)
+	print("Password: " + password)
+else
+	print("Dont connect...")
+end if
+print("###################################")
+
