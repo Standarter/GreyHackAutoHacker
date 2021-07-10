@@ -1,22 +1,23 @@
 current = current_path
+computer = get_shell.host_computer
 if get_shell.host_computer.File(current + "/" + "AutoScanner.src") == null then
-	touch(current, "AutoScanner.src")
+	computer.touch(current, "AutoScanner.src")
 	print("Created AutoScanner.src")
 end if
 if get_shell.host_computer.File(current + "/" + "launcher.src") == null then
-	touch(current, "launcher.src")
+	computer.touch(current, "launcher.src")
 	print("Created launcher.src")
 end if
 if get_shell.host_computer.File(current + "/" + "AutoExploiter.src") == null then
-	touch(current, "AutoExploiter.src")
+	computer.touch(current, "AutoExploiter.src")
 	print("Created AutoExploiter.src")
 end if
 if get_shell.host_computer.File(current + "/" + "AutoExploiterRemote.src") == null then
-	touch(current, "AutoExploiterRemote.src")
+	computer.touch(current, "AutoExploiterRemote.src")
 	print("Created AutoExploiterRemote.src")
 end if
 if get_shell.host_computer.File(current + "/" + "LibSearch.src") == null then
-	touch(current, "LibSearch.src")
+	computer.touch(current, "LibSearch.src")
 	print("Created LibSearch.src")
 end if
 AutoLEVEL = function(folder)
@@ -38,7 +39,7 @@ AutoREMOTE = function(folder, file)
 	file.copy(path1 + "LEVEL1/", file.name)
 	file.copy(path1 + "LEVEL2/", file.name)
 	file.copy(path1 + "LEVEL3/", file.name)
-	end function
+end function
 get_shell.host_computer.create_folder(current, "exploits")
 print("Created folder: exploits")
 get_shell.host_computer.create_folder(current, "builds")
@@ -158,5 +159,3 @@ AER.delete
 LibS.delete
 launcher.delete
 print("Finishing deleting useless files...")
-
-
