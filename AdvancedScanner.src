@@ -1,0 +1,23 @@
+print("###########PORTS############")
+for i in get_shell.host_computer.get_ports
+	print(i.port_number)
+end for
+print("#########NETWORK############")
+print("Connected to: " + active_net_card)
+print("############LIBS###########")
+i = 0
+libs = get_shell.host_computer.File("/lib").get_files
+for lib in libs
+	i = i + 1
+	print(i + ") " + lib.name)
+end for
+print("############USER###########")
+print("Current user: " + active_user)
+print("Home dir: " + home_dir)
+print("Bank: " + user_bank_number)
+print("Mail: " + user_mail_address)
+print("############IP#############")
+print("Local IP: " + host_computer.local_ip)
+print("Public IP: " + get_router.public_ip)
+print("Gateway: " + network_gateway)
+print("###########################")
