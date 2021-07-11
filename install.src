@@ -3,25 +3,38 @@ computer = get_shell.host_computer
 print("#########################################");
 print("Installer version: 1.2");
 print("#########################################");
-if get_shell.host_computer.File(current + "/" + "AutoScanner.src") == null then
-	computer.touch(current, "AutoScanner.src")
+ans1 = user_input("Install AutoExploiter.src (y/n): ")
+ans2 = user_input("Install LibSearch.src (y/n): ")
+ans3 = user_input("Install AdvancedScanner.src (y/n): ")
+ans4 = user_input("Install WifiHacker.src (y/n): ")
+print("#########################################");
+if get_shell.host_computer.File(current + "/src/" + "AutoScanner.src") == null then
+	computer.touch(current + "/src/", "AutoScanner.src")
 	print("Created AutoScanner.src")
 end if
-if get_shell.host_computer.File(current + "/" + "launcher.src") == null then
-	computer.touch(current, "launcher.src")
+if get_shell.host_computer.File(current + "/src/" + "launcher.src") == null then
+	computer.touch(current + "/src/", "launcher.src")
 	print("Created launcher.src")
 end if
-if get_shell.host_computer.File(current + "/" + "AutoExploiter.src") == null then
-	computer.touch(current, "AutoExploiter.src")
-	print("Created AutoExploiter.src")
-end if
-if get_shell.host_computer.File(current + "/" + "AutoExploiterRemote.src") == null then
-	computer.touch(current, "AutoExploiterRemote.src")
+if get_shell.host_computer.File(current + "/src/" + "AutoExploiterRemote.src") == null then
+	computer.touch(current + "/src/", "AutoExploiterRemote.src")
 	print("Created AutoExploiterRemote.src")
 end if
-if get_shell.host_computer.File(current + "/" + "LibSearch.src") == null then
-	computer.touch(current, "LibSearch.src")
+if get_shell.host_computer.File(current + "/src/" + "AutoExploiter.src") == null and ans1 == "y" then
+	computer.touch(current + "/src/", "AutoExploiter.src")
+	print("Created AutoExploiter.src")
+end if
+if get_shell.host_computer.File(current + "/src/" + "LibSearch.src") == null and ans2 == "y" then
+	computer.touch(current + "/src/", "LibSearch.src")
 	print("Created LibSearch.src")
+end if
+if get_shell.host_computer.File(current + "/src/" + "AdvancedScanner.src") == null and ans3 == "y" then
+	computer.touch(current + "/src/", "AdvancedScanner.src")
+	print("Created AdvancedScanner.src")
+end if
+if get_shell.host_computer.File(current + "/src/" + "WifiHacker.src") == null and ans4 == "y" then
+	computer.touch(current + "/src/", "WifiHacker.src")
+	print("Created WifiHacker.src")
 end if
 AutoLEVEL = function(folder)
 	path1 = current_path + "/exploits/" + folder 
@@ -116,24 +129,48 @@ AutoLOCAL("net")
 print("Created folder: addictional folders...")
 user_input("Press enter, if you copy text from GitHub...")
 path2 = current + "/" + "builds/"
-get_shell.build(current + "/" + "AutoScanner.src", path2)
+get_shell.build(current + "/src/" + "AutoScanner.src", path2)
 print("Build: AutoScanner.src")
-get_shell.build(current + "/" + "AutoExploiter.src", path2)
-print("Build: AutoExploiter.src")
-get_shell.build(current + "/" + "AutoExploiterRemote.src", path2)
+get_shell.build(current + "/src/" + "AutoExploiterRemote.src", path2)
 print("Build: AutoExploiterRemote.src")
-get_shell.build(current + "/" + "launcher.src", path2)
+get_shell.build(current + "/src/" + "launcher.src", path2)
 print("Build: launcher.src")
-get_shell.build(current + "/" + "LibSearch.src", path2)
-print("Build: LibSearch.src")
+if ans1 == "y" then
+	get_shell.build(current + "/src/" + "AutoExploiter.src", path2)
+	print("Build: AutoExploiter.src")
+end if
+if ans2 == "y" then
+	get_shell.build(current + "/src/" + "LibSearch.src", path2)
+	print("Build: LibSearch.src")
+end if
+if ans3 == "y" then
+	get_shell.build(current + "/src/" + "AdvancedScanner.src", path2)
+	print("Build: AdvancedScanner.src")
+end if
+if ans4 == "y" then
+	get_shell.build(current + "/src/" + "WifiHacker.src", path2)
+	print("Build: WifiHacker.src")
+end if
 AutoScanner = get_shell.host_computer.File(path2 + "AutoScanner")
-AE = get_shell.host_computer.File(path2 + "AutoExploiter")
+if ans1 == "y" then
+	AE = get_shell.host_computer.File(path2 + "AutoExploiter")
+	AE.copy(current + "/local/", AE.name)
+end if
 launcher = get_shell.host_computer.File(path2 + "launcher")
-LibS = get_shell.host_computer.File(path2 + "LibSearch")
 AutoScanner.copy(current, AutoScanner.name)
-LibS.copy(current + "/local/", LibS.name)
+if ans2 == "y" then
+	LibS = get_shell.host_computer.File(path2 + "LibSearch")
+	LibS.copy(current + "/local/", LibS.name)
+end if
+if ans3 == "y" then
+	AS = get_shell.host_computer.File(path2 + "AdvancedScanner")
+	AS.copy(current + "/local/", AS.name)
+end if
+if ans4 == "y" then
+	WH = get_shell.host_computer.File(path2 + "WifiHacker")
+	WH.copy(current + "/local/", WH.name)
+end if
 launcher.copy(current + "/exploits/", launcher.name)
-AE.copy(current + "/local/", AE.name)
 AER = get_shell.host_computer.File(path2 + "AutoExploiterRemote")
 AutoREMOTE("FTP", AER)
 print("Copy files...")
@@ -155,8 +192,18 @@ AutoREMOTE("NewPassword", AER)
 print("Copy files...")
 print("Start deleting useless files...")
 AutoScanner.delete
-AE.delete
+if ans1 == "y" then
+	AE.delete
+end if
+if ans2 == "y" then
+	LibS.delete
+end if
+if ans3 == "y" then
+	AS.delete
+end if
+if ans4 == "y" then
+	WH.delete
+end if
 AER.delete
-LibS.delete
 launcher.delete
 print("Finishing deleting useless files...")
