@@ -1,64 +1,64 @@
-current = current_path + "/"
-exploit_path = current + "exploits/"
-vuln_ports = [21, 22, 25, 80, 3306, 3307]
+current = current_path + "/";
+exploit_path = current + "exploits/";
+vuln_ports = [21, 22, 25, 80, 3306, 3307];
 test_port = function(port, ports)
 	for i in ports
 		if port == i.port_number then
-			return 1
-		end if
-	end for
-	return 0
-end function
-print("###########################")
-print("Version: 1.0")
-print("Created: DefaultDF")
-ip = user_input("Enter IP: ", 0)
-print("###########################")
-print("1) Remote shell")
-print("2) /etc/passwd")
-print("3) Change password")
-print("4) Hack bank account")
-variant = user_input("Mode: ")
-if variant == "1" then
-	print("###########################")
-	route = get_router(ip).used_ports
-	j = 0
+			return 1;
+		end if;
+	end for;
+	return 0;
+end function;
+print("###########################");
+print("Version: 1.1");
+print("Created: DefaultDF");
+ip = user_input("Enter IP: ", 0);
+print("###########################");
+print("1) Remote shell");
+print("2) /etc/passwd");
+print("3) Change password");
+print("4) Hack bank account");
+variant = user_input("Mode: ");
+route = get_router(ip).used_ports;
+if variant == "1" then;
+	print("###########################");
+	j = 0;
 	for i in route
-		j = j + 1
-		print(j + ") " + i.port_number)
-	end for
-	target_port = user_input("Enter port: ", 0)
-end if
-print("###########################")
+		j = j + 1;
+		print(j + ") " + i.port_number);
+	end for;
+	target_port = user_input("Enter port: ", 0);
+end if;
+print("###########################");
 if variant == "1" then
 	if target_port == "21" then
-		get_shell.launch(exploit_path + "launcher", "FTP" + " " + ip + " " + target_port)
+		get_shell.launch(exploit_path + "launcher", "FTP" + " " + ip + " " + target_port);
 	else if target_port == "22" then
-		get_shell.launch(exploit_path + "launcher", "SSH" + " " + ip + " " + target_port)
+		get_shell.launch(exploit_path + "launcher", "SSH" + " " + ip + " " + target_port);
 	else if target_port == "25" then
-		get_shell.launch(exploit_path + "launcher", "SMTP" + " " + ip + " " + target_port)
+		get_shell.launch(exploit_path + "launcher", "SMTP" + " " + ip + " " + target_port);
 	else if target_port == "80" then
-		get_shell.launch(exploit_path + "launcher", "HTTP" + " " + ip + " " + target_port)
+		get_shell.launch(exploit_path + "launcher", "HTTP" + " " + ip + " " + target_port);
 	else if target_port == "3306" then
-		get_shell.launch(exploit_path + "launcher", "SQL" + " " + ip + " " + target_port)
+		get_shell.launch(exploit_path + "launcher", "SQL" + " " + ip + " " + target_port);
 	else if target_port == "3307" then
-		get_shell.launch(exploit_path + "launcher", "SQL" + " " + ip + " " + target_port)
+		get_shell.launch(exploit_path + "launcher", "SQL" + " " + ip + " " + target_port);
 	else
-		print("This port is not vulnerable...Sorry...")
-	end if
-end if
+		print("This port is not vulnerable...Sorry...");
+	end if;
+end if;
 if variant == "2" then
-	for i in vuln_ports
-		get_shell.launch(exploit_path + "launcher", "passwd" + " " + ip + " " + i)
-		end for
-	end if
+	for i in route
+		get_shell.launch(exploit_path + "launcher", "passwd" + " " + ip + " " + i.port_number);
+	end for;
+end if;
 if variant == "3" then
-	for i in vuln_ports
-		get_shell.launch(exploit_path + "launcher", "NewPassword" + " " + ip + " " + i)
-		end for
-end if
+	for i in route
+		get_shell.launch(exploit_path + "launcher", "NewPassword" + " " + ip + " " + i.port_number);
+	end for;
+end if;
 if variant == "4" then
-	for i in vuln_ports
-		get_shell.launch(exploit_path + "launcher", "BANK" + " " + ip + " " + i)
-		end for
-	end if
+	for i in route
+		get_shell.launch(exploit_path + "launcher", "BANK" + " " + ip + " " + i.port_number);
+	end for;
+end if;
