@@ -2,8 +2,8 @@ current = current_path + "/" +  params[0] + "/"
 l1 = "LEVEL1/"
 l2 = "LEVEL2/"
 l3 = "LEVEL3/"
-get_shell.launch(current + l1 + "AutoExploiterRemote", params[1] + " " + params[2])
-get_shell.launch(current + l2 + "AutoExploiterRemote", params[1] + " " + params[2])
 get_shell.launch(current + l3 + "AutoExploiterRemote", params[1] + " " + params[2])
+get_shell.launch(current + l2 + "AutoExploiterRemote", params[1] + " " + params[2])
+get_shell.launch(current + l1 + "AutoExploiterRemote", params[1] + " " + params[2])
 
 
