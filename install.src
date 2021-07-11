@@ -1,5 +1,8 @@
 current = current_path
 computer = get_shell.host_computer
+print("#########################################")
+print("Installer version: 1.2")
+print("#########################################")
 if get_shell.host_computer.File(current + "/" + "AutoScanner.src") == null then
 	computer.touch(current, "AutoScanner.src")
 	print("Created AutoScanner.src")
@@ -36,9 +39,7 @@ AutoLOCAL = function(folder)
 end function
 AutoREMOTE = function(folder, file)
 	path1 = current_path + "/exploits/" + folder + "/"
-	file.copy(path1 + "LEVEL1/", file.name)
-	file.copy(path1 + "LEVEL2/", file.name)
-	file.copy(path1 + "LEVEL3/", file.name)
+	file.copy(path1, file.name)
 end function
 get_shell.host_computer.create_folder(current, "exploits")
 print("Created folder: exploits")
