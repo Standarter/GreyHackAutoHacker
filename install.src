@@ -36,6 +36,7 @@ if get_shell.host_computer.File(current + "/src/" + "WifiHacker.src") == null an
 	computer.touch(current + "/src/", "WifiHacker.src")
 	print("Created WifiHacker.src")
 end if
+print("#########################################");
 AutoLEVEL = function(folder)
 	path1 = current_path + "/exploits/" + folder 
 	get_shell.host_computer.create_folder(path1, "LEVEL1")
