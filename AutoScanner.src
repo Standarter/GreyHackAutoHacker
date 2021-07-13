@@ -1,5 +1,21 @@
 current = current_path + "/";
 exploit_path = current + "exploits/";
+CountFilesBin = function(path_string)
+	i = 0
+	for file in get_shell.host_computer.File(path_string).get_files
+		if file.is_binary == 1 then
+			i = i + 1;
+		end if;
+	end for;
+	return i;
+end function
+CountFilesBinR = function(path_string)
+	i = 0
+	i = i + CountFilesBin(exploit_path + path_string + "/LEVEL1/")
+	i = i + CountFilesBin(exploit_path + path_string + "/LEVEL2/")
+	i = i + CountFilesBin(exploit_path + path_string + "/LEVEL3/")
+	return i;
+end function;
 line = "###########################"
 test_port = function(port, ports)
 	for i in ports
@@ -10,7 +26,7 @@ test_port = function(port, ports)
 	return 0;
 end function;
 print(line);
-print("Version: 1.1");
+print("Version: 1.3");
 print("Created: DefaultDF");
 print(line);
 ip = user_input("Enter IP: ", 0);
@@ -22,6 +38,20 @@ for i in route
 	portinfo = get_router(ip).port_info(i).split(" ")
 	print(j + ") " + i.port_number + " (" + portinfo[0] + ")" + " Ver: " + portinfo[1]);
 end for;
+print(line);
+r1 = CountFilesBinR("FTP");
+r1 = r1 + CountFilesBinR("SQL");
+r1 = r1 + CountFilesBinR("SSH");
+r1 = r1 + CountFilesBinR("HTTP");
+r1 = r1 + CountFilesBinR("SMTP");
+r1 = r1 + CountFilesBinR("RSHELL");
+print("Remote shell exploits: " + r1);
+r1 = CountFilesBinR("BANK");
+print("Bank exploits: " + r1);
+r1 = CountFilesBinR("passwd");
+print("passwd exploits: " + r1);
+r1 = CountFilesBinR("NewPassword");
+print("Change password exploits: " + r1);
 print(line);
 print("1) Remote shell");
 print("2) /etc/passwd");
